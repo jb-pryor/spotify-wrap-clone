@@ -6,7 +6,7 @@ export default function SpotifyLoginButton() {
     <div className="flex justify-center items-center">
       <a
         href={getSpotifyLoginUrl()}
-        className="text-white text-7xl hover:bg-neutral-800 transition p-5 rounded-xl"
+        className="text-white text-7xl hover:bg-neutral-800 transition p-5 rounded-xl font-bold"
       >
         Login with Spotify
       </a>

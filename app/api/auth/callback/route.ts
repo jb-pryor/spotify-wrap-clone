@@ -31,5 +31,15 @@ export async function GET(req: Request) {
   // TODO: store access_token securely (cookie / session)
   console.log(tokenData)
 
-  return NextResponse.redirect("http://localhost:3000/dashboard")
+  const response = NextResponse.redirect("http://127.0.0.1:3000/dashboard")
+
+  response.cookies.set("spotify_access_token", tokenData.access_token, { //stores token securely
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    maxAge: tokenData.expires_in, // seconds
+    path: "/",
+  })
+
+  return response
 }

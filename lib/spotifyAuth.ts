@@ -1,6 +1,7 @@
 const scopes = [
   "user-top-read",
   "user-read-recently-played",
+  "user-read-email",
   "user-read-private",
 ].join(" ")
 
