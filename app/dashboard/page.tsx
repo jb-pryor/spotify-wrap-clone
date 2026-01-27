@@ -13,6 +13,7 @@ type Song = {
   name: string
   artist: string
   albumImage?: string
+  trackId: string
 }
 
 type Artist = {
@@ -21,7 +22,21 @@ type Artist = {
 }
 
 
+function countryCodeToFlagEmoji(code: string): string {
+  if (!code || code.length !== 2) return "🏳️";
+
+  return code
+    .toUpperCase()
+    .replace(/./g, (char) =>
+      String.fromCodePoint(127397 + char.charCodeAt(0))
+    );
+}
+
+
+
 export default function Home() {
+
+  
 
   const [user, setUser] = useState<User | null>(null)
 
@@ -84,33 +99,41 @@ export default function Home() {
 
   return (
     <>
-      <div className="bg-neutral-900 p-10 m-15 rounded-lg">
-        <div className="flex gap-5">
+      <div className="bg-neutral-900 p-2 pl-5 pr-5 m-15 rounded-lg">
+        <div className="flex gap-5 items-center justify-between w-full">
           <div className="flex gap-1">
             {user.profileImage && ( <img src={user.profileImage} alt="Profile" className="w-16 h-16 rounded-full"/> )}
-            <div className="text-2xl">@{user.username}</div>
+            <div className="text-2xl p-5">@{user.username}</div>
           </div>
-          <div className="flex gap-1">
+          <div>
+            <img src="/spotify.svg" alt="spotify" className='h-28 p-5'/>
+          </div>
+          {/*<div className="flex gap-1">
             <div className="text-2xl">TMLA:</div>
             <div className="text-2xl">254</div>
-          </div>
+          </div>*/}
         </div>
         
-        <h1 className="text-6xl text-center pt-10 font-bold">Welcome {user.username}</h1>
-        <h2 className="text-4xl text-center p-2 pb-10">to Your Spotify Dashboard</h2>
+        <h1 className="text-7xl text-center p-3 font-bold">Welcome {user.username}</h1>
+        <h2 className="text-5xl text-center p-2 pb-10">to Your Spotify Dashboard</h2>
 
         <div className="flex flex-col gap-2 justify-center items-center text-xl">
-          <div className="flex gap-2">
-            <div className="bg-neutral-800 p-5 rounded-lg"><span className="pr-5 text-2xl">🇺🇸</span>{user.country}</div>
+          <div className="flex gap-2 text-3xl font-bold">
+            
+            
+            <div className="bg-neutral-800 p-5 rounded-lg">
+              <div className="p-5">{countryCodeToFlagEmoji(user.country)} {user.country} </div>
+            </div>
 
 
-            <div className="bg-neutral-800 rounded-lg hover:bg-neutral-700 transition ease-linear"><button onClick={() => setShowArtists(true)} className="cursor-pointer p-5"><h2>View Top Artists</h2>
-            </button></div>
+            <div className="bg-neutral-800 rounded-lg hover:bg-neutral-700 transition ease-linear text-blue-300">
+              <button onClick={() => setShowArtists(true)} className="p-5 cursor-pointer"><div className="rounded-lg p-5"><h2>View Top Artists</h2></div></button>
+            </div>
 
-            <div className="bg-neutral-800 rounded-lg hover:bg-neutral-700 transition ease-linear">
+            <div className="bg-neutral-800 rounded-lg hover:bg-neutral-700 transition ease-linear text-green-300">
                 <button onClick={() => setShowSongs(true)} className="p-5 cursor-pointer"><div className="rounded-lg p-5"><h2>View Top Songs</h2></div></button>
             </div>
-            <div className="bg-neutral-800 rounded-lg hover:bg-neutral-700 transition ease-linear">
+            <div className="bg-neutral-800 rounded-lg hover:bg-neutral-700 transition ease-linear text-red-300">
                 <button onClick={() => setShowGenres(true)} className="p-5 cursor-pointer"><div className="rounded-lg p-5"><h2>View Top Genres</h2></div></button>
             </div>
           </div>
@@ -119,9 +142,23 @@ export default function Home() {
           🎉 🥳 According to your recent song history you are a partyer loving to dance and have a good time! 🎉🥳
           </div>*/}
 
-          <div className="flex gap-2">
-            {recommendation && (<div className="bg-neutral-800 p-5 rounded-lg"><h2>Next Song Recommendation:</h2>{recommendation.name} • {recommendation.artist}</div>)}
-            {lastPlayed && ( <div className="bg-neutral-800 p-5 rounded-lg"><h2>Last Song Listened To:</h2>{lastPlayed.name} • {lastPlayed.artist}</div> )}
+          <div className="flex gap-2 pb-15">
+            {/*recommendation && (<div className="bg-neutral-800 p-5 rounded-lg"><h2>Next Song Recommendation:</h2><div className="pt-2"><span className="text-2xl">{recommendation.name}</span><br /> <span className="font-neutral-100">{recommendation.artist}</span></div> </div>)*/}
+            <div className="bg-neutral-800 p-5 rounded-lg h-38 text-4xl text-pink-200 font-bold">Next <br /> Song <br /> Rec</div>
+            {recommendation && <iframe
+              src={`https://open.spotify.com/embed/track/${recommendation.trackId}`}
+              width="300"
+              height="200"
+              allow="encrypted-media"
+            /> }
+            {/*lastPlayed && ( <div className="bg-neutral-800 p-5 rounded-lg h-38"><h2>Last Song Listened To:</h2>{lastPlayed.name} •{"\n"} {lastPlayed.artist}</div> )*/}
+            <div className="bg-neutral-800 p-5 rounded-lg h-38 text-4xl text-yellow-200 font-bold">Last <br /> Song <br /> Played</div>
+            {lastPlayed && <iframe
+              src={`https://open.spotify.com/embed/track/${lastPlayed.trackId}`}
+              width="300"
+              height="200"
+              allow="encrypted-media"
+            /> }
           </div>
 
 

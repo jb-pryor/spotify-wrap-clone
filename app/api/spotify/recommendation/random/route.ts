@@ -15,5 +15,6 @@ export async function GET() {
     artist: random.track.artists[0].name,
     albumImage: random.track.album.images[0]?.url,
     previewUrl: random.track.preview_url,
+    trackId: random.track.id,
   })
 }

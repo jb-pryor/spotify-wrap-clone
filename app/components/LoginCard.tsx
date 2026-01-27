@@ -12,8 +12,8 @@ function LoginCard () {
           <SpotifyLoginButton></SpotifyLoginButton>
         </div>
 
-        <p className='text-center p-2'>
-          Don't wait a whole year for your Wrapped access the info here ;{')'}
+        <p className='text-center p-2 text-xl'>
+          Don't wait a whole year for your Spotify Wrapped access the info here ;{')'}
         </p>
       </div>
     </>

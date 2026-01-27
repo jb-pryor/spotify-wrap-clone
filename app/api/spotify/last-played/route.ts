@@ -13,5 +13,6 @@ export async function GET() {
     artist: last.track.artists[0].name,
     playedAt: last.played_at,
     albumImage: last.track.album.images[0]?.url,
+    trackId: last.track.id,
   })
 }
