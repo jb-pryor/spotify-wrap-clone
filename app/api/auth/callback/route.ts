@@ -31,7 +31,7 @@ export async function GET(req: Request) {
   // TODO: store access_token securely (cookie / session)
   console.log(tokenData)
 
-  const response = NextResponse.redirect("https://spotify-wrap-clone.vercel.app/api/auth/callback/dashboard")
+  const response = NextResponse.redirect("https://spotify-wrap-clone.vercel.app/dashboard")
 
   response.cookies.set("spotify_access_token", tokenData.access_token, { //stores token securely
     httpOnly: true,
