@@ -4,6 +4,8 @@ import { NextResponse } from "next/server"
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url)
   const code = searchParams.get("code")
+  const url = new URL(req.url); // req undefined
+
 
   if (!code) {
     return NextResponse.redirect("/")
@@ -32,7 +34,7 @@ export async function GET(req: Request) {
   console.log(tokenData)
 
   const response = NextResponse.redirect(
-    new URL("/dashboard", req.url)
+    new URL("/dashboard", url.origin)
   );
 
   response.cookies.set("spotify_access_token", tokenData.access_token, { //stores token securely
