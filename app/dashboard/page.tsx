@@ -99,14 +99,14 @@ export default function Home() {
 
   return (
     <>
-      <div className="bg-neutral-900 p-2 pl-5 pr-5 m-15 rounded-xl">
-        <div className="flex gap-5 items-center justify-between w-full">
+      <div className="bg-neutral-900 rounded-xl max-w-6xl mx-auto px-4 sm:px-6 md:px-10 py-6">
+        <div className="flex flex-col sm:flex-row gap-5 items-center justify-between w-full">
           <div className="flex gap-1">
             {user.profileImage && ( <img src={user.profileImage} alt="Profile" className="w-16 h-16 rounded-full"/> )}
-            <div className="text-3xl pl-2 p-4 ">{user.username}</div>
+            <div className="text-2xl sm:text-3xl font-semibold px-2">{user.username}</div>
           </div>
           <div>
-            <a href="https://open.spotify.com/" target="_blank"><img src="/spotify.svg" alt="spotify" className='h-28 p-5'/></a>
+            <a href="https://open.spotify.com/" target="_blank"><img src="/spotify.svg" alt="spotify" className='h-16 sm:h-20 md:h-24'/></a>
           </div>
           {/*<div className="flex gap-1">
             <div className="text-2xl">TMLA:</div>
@@ -115,24 +115,24 @@ export default function Home() {
         </div>
         
         {/*<h1 className="text-8xl text-center p-3 font-bold">Welcome {user.username}</h1>*/}
-        <h2 className="text-7xl font-bold text-center p-2 pt-10 pb-20">Your Spotify Dashboard:</h2>
+        <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold text-center py-10">Your Spot Dashboard:</h2>
 
         <div className="flex flex-col gap-2 justify-center items-center text-xl">
-          <div className="flex gap-2 text-3xl font-bold">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 font-bold">
             
             
             
 
 
             <div className="bg-neutral-800 rounded-lg hover:bg-neutral-700 transition ease-linear text-blue-300">
-              <button onClick={() => setShowArtists(true)} className="p-5 cursor-pointer"><div className="rounded-lg p-5"><img src="/artist.png" alt="Spotify" className="h-24"/><h2>View Top Artists</h2></div></button>
+              <button onClick={() => setShowArtists(true)} className="p-4 sm:p-5 w-full cursor-pointer"><div className="rounded-lg p-5"><img src="/artist.png" alt="Spotify" className="h-16 sm:h-20 mx-auto"/><h2>View Top Artists</h2></div></button>
             </div>
 
             <div className="bg-neutral-800 rounded-lg hover:bg-neutral-700 transition ease-linear text-green-300">
-                <button onClick={() => setShowSongs(true)} className="p-5 cursor-pointer"><div className="rounded-lg p-5"><img src="/bestblacksong.png" alt="Spotify" className="h-24"/><h2>View Top Songs</h2></div></button>
+                <button onClick={() => setShowSongs(true)} className="p-4 sm:p-5 w-full cursor-pointer"><div className="rounded-lg p-5"><img src="/bestblacksong.png" alt="Spotify" className="h-16 sm:h-20 mx-auto"/><h2>View Top Songs</h2></div></button>
             </div>
             <div className="bg-neutral-800 rounded-lg hover:bg-neutral-700 transition ease-linear text-red-300">
-                <button onClick={() => setShowGenres(true)} className="p-5 cursor-pointer"><div className="rounded-lg p-5"><img src="/genre.png" alt="Spotify" className="h-24"/><h2>View Top Genres</h2></div></button>
+                <button onClick={() => setShowGenres(true)} className="p-4 sm:p-5 w-full cursor-pointer"><div className="rounded-lg p-5"><img src="/genre.png" alt="Spotify" className="h-16 sm:h-20 mx-auto"/><h2>View Top Genres</h2></div></button>
             </div>
           </div>
 
@@ -140,28 +140,26 @@ export default function Home() {
           🎉 🥳 According to your recent song history you are a partyer loving to dance and have a good time! 🎉🥳
           </div>*/}
 
-          <div className="flex gap-2 pb-15">
+          <div className="flex flex-wrap gap-4 justify-center">
             {/*recommendation && (<div className="bg-neutral-800 p-5 rounded-lg"><h2>Next Song Recommendation:</h2><div className="pt-2"><span className="text-2xl">{recommendation.name}</span><br /> <span className="font-neutral-100">{recommendation.artist}</span></div> </div>)*/}
 
             {/*<div className="bg-neutral-800 p-5 rounded-lg h-38 align-center">
               <div className="p-5 text-3xl font-bold">{countryCodeToFlagEmoji(user.country)} {user.country} </div>
             </div>*/}
 
-            <div className="bg-neutral-800 p-5 rounded-lg h-38 text-4xl text-pink-200 font-bold hover:text-pink-100">Next <br /> Song <br /> Rec</div>
-            {recommendation && <iframe
+            <div className="bg-neutral-800 p-5 rounded-lg h-38 text-xl sm:text-2xl md:text-4xl leading-tight text-center text-pink-200 font-bold hover:text-pink-100">Next <br /> Song <br /> Rec</div>
+            {recommendation && <div className="flex flex-wrap gap-4 justify-center"><iframe
+              className="w-full h-48 rounded-lg"
               src={`https://open.spotify.com/embed/track/${recommendation.trackId}`}
-              width="300"
-              height="200"
               allow="encrypted-media"
-            /> }
+            /></div> }
             {/*lastPlayed && ( <div className="bg-neutral-800 p-5 rounded-lg h-38"><h2>Last Song Listened To:</h2>{lastPlayed.name} •{"\n"} {lastPlayed.artist}</div> )*/}
-            <div className="bg-neutral-800 p-5 rounded-lg h-38 text-4xl text-yellow-200 font-bold hover:text-yellow-100">Last <br /> Song <br /> Played</div>
-            {lastPlayed && <iframe
+            <div className="bg-neutral-800 p-5 rounded-lg h-38 text-xl sm:text-2xl md:text-4xl leading-tight text-centertext-yellow-200 font-bold hover:text-yellow-100">Last <br /> Song <br /> Played</div>
+            {lastPlayed && <div className="flex flex-wrap gap-4 justify-center"><iframe
+              className="w-full h-48 rounded-lg"
               src={`https://open.spotify.com/embed/track/${lastPlayed.trackId}`}
-              width="300"
-              height="200"
               allow="encrypted-media"
-            /> }
+            /></div> }
           </div>
 
 
@@ -174,7 +172,7 @@ export default function Home() {
       {showArtists && (
         <div className="fixed inset-0 bg-black/80 flex justify-center items-center z-50 transition ease-linear">
           
-          <div className="bg-neutral-900 p-6 rounded-lg text-center font-bold">
+          <div className="bg-neutral-900 p-6 rounded-lg text-center font-bold w-[90%] max-w-md">
             {/*<h2 className="text-3xl mb-4">Top Artists</h2>*/}
 
             {topArtists.slice(0, 5).map((artist) => (
@@ -194,10 +192,10 @@ export default function Home() {
       {showGenres && (
          <div className="fixed inset-0 bg-black/80 flex justify-center items-center z-50 transition ease-linear">
           
-         <div className="bg-neutral-900 p-6 px-15 rounded-lg text-center text-red-300 font-bold">
+         <div className="bg-neutral-900 p-6 rounded-lg text-center font-bold w-[90%] max-w-md">
 
            {topGenres.slice(0, 5).map((genre) => (
-             <div key={genre} className="py-1 text-3xl">
+             <div key={genre} className="py-1 text-3xl text-red-300">
                {genre}
              </div>
            ))}
@@ -217,11 +215,11 @@ export default function Home() {
   {showSongs && (
          <div className="fixed inset-0 bg-black/80 flex justify-center items-center z-50 transition ease-linear">
           
-         <div className="bg-neutral-900 px-15 text-green-300 font-bold p-6 rounded-lg text-center ">
+         <div className="bg-neutral-900 p-6 rounded-lg text-center font-bold w-[90%] max-w-md">
            {/*<h2 className="text-2xl mb-4">Top Songs</h2>*/}
 
            {topSongs.slice(0, 5).map((song) => (
-             <div key={song.name} className="py-1 text-3xl">
+             <div key={song.name} className="py-1 text-3xl text-green-300">
                {song.name}
                {"     "}
                •

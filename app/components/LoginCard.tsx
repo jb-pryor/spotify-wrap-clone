@@ -6,8 +6,8 @@ function LoginCard () {
 
   return (
     <>
-      <div className='bg-neutral-900 mr-75 ml-75 mt-20 rounded-xl'>
-        <div className='flex justify-center text-center p-15 gap-10'>
+      <div className="bg-neutral-900 mt-20 rounded-xl max-w-lg mx-auto px-6 py-8">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
           <img src="/spotify.svg" alt="spotify" className='flex-1'/>
           <SpotifyLoginButton></SpotifyLoginButton>
         </div>
